@@ -90,7 +90,7 @@ function App() {
             style={{ marginBottom: 'auto', marginTop: 'auto' }}
           />
           <b className="headerTitle">SC ENVIRONMENT MONITORING</b>
-          <div className="date">As of August 1, 2023</div>
+          <div className="date">As of January 5, 2024</div>
 
           <img
             src="https://EijiGorilla.github.io/Symbols/Projec_Logo/GCR LOGO.png"
