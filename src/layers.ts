@@ -9,13 +9,14 @@ import {
   PointSymbol3D,
   IconSymbol3DLayer,
   SimpleMarkerSymbol,
+  SimpleLineSymbol,
 } from '@arcgis/core/symbols';
 import LineCallout3D from '@arcgis/core/symbols/callouts/LineCallout3D';
 
 /* Standalone table for Dates */
 export const dateTable = new FeatureLayer({
   portalItem: {
-    id: '68fe46f717f94218a9adcbc1dfb908b7',
+    id: 'b2a118b088a44fa0a7a84acbe0844cb2',
     portal: {
       url: 'https://gis.railway-sector.com/portal',
     },
@@ -50,12 +51,12 @@ var chainageRenderer = new SimpleRenderer({
 
 export const chainageLayer = new FeatureLayer({
   portalItem: {
-    id: '299f80a1d0844e109dcf354f9463f6b4',
+    id: 'e09b9af286204939a32df019403ef438',
     portal: {
       url: 'https://gis.railway-sector.com/portal',
     },
   },
-  layerId: 5,
+  layerId: 2,
   title: 'Chainage',
   elevationInfo: {
     mode: 'relative-to-ground',
@@ -113,12 +114,12 @@ let stationBoxRenderer = new UniqueValueRenderer({
 
 export const stationBoxLayer = new FeatureLayer({
   portalItem: {
-    id: '299f80a1d0844e109dcf354f9463f6b4',
+    id: 'e09b9af286204939a32df019403ef438',
     portal: {
       url: 'https://gis.railway-sector.com/portal',
     },
   },
-  layerId: 3,
+  layerId: 7,
   renderer: stationBoxRenderer,
   minScale: 150000,
   maxScale: 0,
@@ -131,16 +132,18 @@ export const stationBoxLayer = new FeatureLayer({
 });
 
 /* ROW Layer */
+var prowRenderer = new SimpleRenderer({
+  symbol: new SimpleLineSymbol({
+    color: '#ff0000',
+    width: '2px',
+  }),
+});
+
 export const prowLayer = new FeatureLayer({
-  portalItem: {
-    id: '299f80a1d0844e109dcf354f9463f6b4',
-    portal: {
-      url: 'https://gis.railway-sector.com/portal',
-    },
-  },
-  layerId: 1,
+  url: 'https://gis.railway-sector.com/server/rest/services/SC_Alignment/FeatureServer/5',
   title: 'PROW',
   popupEnabled: false,
+  renderer: prowRenderer,
 });
 prowLayer.listMode = 'hide';
 
@@ -187,12 +190,12 @@ var labelClass = new LabelClass({
 
 export const stationLayer = new FeatureLayer({
   portalItem: {
-    id: '299f80a1d0844e109dcf354f9463f6b4',
+    id: 'e09b9af286204939a32df019403ef438',
     portal: {
       url: 'https://gis.railway-sector.com/portal',
     },
   },
-  layerId: 2,
+  layerId: 6,
   title: 'N2 Stations',
   labelingInfo: [labelClass],
   elevationInfo: {
@@ -292,11 +295,12 @@ const MonitorLabel = new LabelClass({
 
 export const monitorPointLayer = new FeatureLayer({
   portalItem: {
-    id: '7d455cc05fb84809a15e7545fe442c2a',
+    id: 'dfd0bca99c754002b55459004b684415',
     portal: {
       url: 'https://gis.railway-sector.com/portal',
     },
   },
+  layerId: 1,
   title: 'Monitoring Indicators',
   elevationInfo: {
     mode: 'relative-to-scene',
