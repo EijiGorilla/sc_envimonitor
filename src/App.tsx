@@ -21,6 +21,7 @@ import {
 } from '@esri/calcite-components-react';
 import Chart from './components/Chart';
 import { dateUpdate } from './Query';
+import { monitorPointLayer } from './layers';
 
 function App() {
   const [asOfDate, setAsOfDate] = useState<undefined | any | unknown>(null);
@@ -33,6 +34,14 @@ function App() {
   const calcitePanelBasemaps = useRef<HTMLDivElement | undefined | any>(null);
   const [activeWidget, setActiveWidget] = useState<undefined | any | unknown>(null);
   const [nextWidget, setNextWidget] = useState<undefined | any | unknown>(null);
+
+  //
+  const [monitorPointLayerLoaded, setMonitorPointLayerLoaded] = useState<any>();
+  useEffect(() => {
+    monitorPointLayer.load().then(() => {
+      setMonitorPointLayerLoaded(monitorPointLayer.loadStatus);
+    });
+  });
 
   // End of dropdown list
   useEffect(() => {
@@ -77,18 +86,18 @@ function App() {
     <div>
       <CalciteShell>
         <CalciteTabs slot="panel-end" style={{ width: '27vw' }}>
-          <Chart />
+          {monitorPointLayerLoaded === 'loaded' && <Chart />}
         </CalciteTabs>
         <header
           slot="header"
           id="header-title"
-          style={{ display: 'flex', width: '100%', padding: '0 1rem' }}
+          style={{ display: 'flex', width: '100%', height: '70px', padding: '0 1rem' }}
         >
           <img
             src="https://EijiGorilla.github.io/Symbols/Projec_Logo/DOTr_Logo_v2.png"
             alt="DOTr Logo"
-            height={'2.9%'}
-            width={'2.9%'}
+            height={'50px'}
+            width={'50px'}
             style={{ marginBottom: 'auto', marginTop: 'auto' }}
           />
           <b className="headerTitle">SC ENVIRONMENT MONITORING</b>
@@ -97,8 +106,8 @@ function App() {
           <img
             src="https://EijiGorilla.github.io/Symbols/Projec_Logo/GCR LOGO.png"
             alt="GCR Logo"
-            height={'4.4%'}
-            width={'4.4%'}
+            height={'50px'}
+            width={'70px'}
             style={{
               marginBottom: 'auto',
               marginTop: 'auto',
